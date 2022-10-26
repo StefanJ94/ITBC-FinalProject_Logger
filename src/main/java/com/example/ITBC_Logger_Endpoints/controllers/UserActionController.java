@@ -51,7 +51,6 @@ public class UserActionController {
         if (!user.getEmail().contains("@") || user.getEmail().length() < 6 || !user.getEmail().contains("."))
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 
-
         // Generate random id and add it to Client-User from request
         user.setId(UUID.randomUUID());
 
