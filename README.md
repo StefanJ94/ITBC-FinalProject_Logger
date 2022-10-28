@@ -4,7 +4,8 @@ Instructions:
 
 1. Open project with your Java IntelliJ IDEA;
 2. Open your SQL server (MSSQL, MySQL, PostgreSQL or similar);
-3. In java project on the path (src/main/resources/static/CreateUser.sql) you will find Query for creating a table and INSERT INTO SQL QUERY for creating new Users;
+3. In java project on the path (src/main/resources/static/CreateUser.sql) you will find Query for creating a table and
+   INSERT INTO SQL queries for creating new Users and Logs;
 4. You will need to set a username and password for created database and set it up in src/main/resources/application.properties
 
 AND YOU'RE READY TO GO!
