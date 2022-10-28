@@ -1,5 +1,6 @@
 package com.example.ITBC_Logger_Endpoints.controllers;
 
+import com.example.ITBC_Logger_Endpoints.model.Log;
 import com.example.ITBC_Logger_Endpoints.model.User;
 import com.example.ITBC_Logger_Endpoints.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,4 +23,10 @@ public class UserQueryController {
     public List<User> getAllUsers() {
        return userRepository.getAllUsers();
     }
+
+    @GetMapping("api/logs/search")
+    public List<Log> getAllLogs() {
+        return userRepository.getAllLogs();
+    }
+
 }

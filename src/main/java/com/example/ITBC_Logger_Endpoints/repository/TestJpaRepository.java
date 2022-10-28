@@ -13,10 +13,14 @@ import java.util.UUID;
 public interface TestJpaRepository extends JpaRepository<User, UUID> {
 
     Optional<User> findById(UUID id);
+    Optional<User> findByUsernameOrEmail(String username,String email);
+    Optional<User> findByUsername(String username);
 
     List<User> findByUsernameStartsWith(String username);
-
     List<User> findByEmailStartsWith(String email);
+
+    Optional<Log> findById(int logId);
+
 
     @Query(value = "SELECT COUNT(*) FROM Users WHERE username=:username", nativeQuery = true)
     Integer isDuplicateUserName(@Param("username") String username);

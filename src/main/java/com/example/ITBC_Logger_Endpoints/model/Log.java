@@ -4,7 +4,7 @@ import com.example.ITBC_Logger_Endpoints.enums.LogType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -16,23 +16,36 @@ public class Log {
     private String message;
     private LogType logType;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
-    private LocalDateTime dateTime;
+    private LocalDate dateTime;
     private UUID id;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
 
-    public Log(int logId, String message, LogType logType, LocalDateTime dateTime, UUID id) {
+    public Log(int logId, String message, LogType logType, LocalDate dateTime, UUID id) {
         this.logId = logId;
         this.message = message;
         this.logType = logType;
         this.dateTime = dateTime;
         this.id = id;
+        User user;
     }
 
-    public Log(String message, LogType logType, LocalDateTime dateTime, UUID id) {
+    public Log(String message, LogType logType, LocalDate dateTime, UUID id) {
         this.message = message;
         this.logType = logType;
         this.dateTime = dateTime;
         this.id = id;
+        User user;
     }
 
     public Log(String message) {
@@ -66,11 +79,11 @@ public class Log {
         this.logType = logType;
     }
 
-    public LocalDateTime getDateTime() {
+    public LocalDate getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
+    public void setDateTime(LocalDate dateTime) {
         this.dateTime = dateTime;
     }
 

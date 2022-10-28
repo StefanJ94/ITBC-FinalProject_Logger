@@ -1,16 +1,19 @@
 package com.example.ITBC_Logger_Endpoints.model;
 
+
 import lombok.Data;
 import org.springframework.validation.annotation.Validated;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.UUID;
 
 @Data
 @Entity
 @Table(name = "Users")
 @Validated
-public class User {
+public class Admin {
 
     @Id
     private UUID id;
@@ -18,22 +21,20 @@ public class User {
     private String password;
     private String email;
 
-
-    public User(UUID id, String username, String password, String email) {
+    public Admin(UUID id, String username, String password, String email) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
     }
 
-    public User(String username, String password, String email) {
+    public Admin(String username, String password, String email) {
         this.username = username;
         this.password = password;
         this.email = email;
-
     }
 
-    public User() {
+    public Admin() {
     }
 
     public UUID getId() {
@@ -67,15 +68,5 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
-
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                '}';
-    }
 }
+
