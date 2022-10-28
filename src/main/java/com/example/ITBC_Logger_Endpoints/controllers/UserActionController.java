@@ -2,6 +2,8 @@ package com.example.ITBC_Logger_Endpoints.controllers;
 
 
 import com.example.ITBC_Logger_Endpoints.RegexPassword;
+import com.example.ITBC_Logger_Endpoints.enums.LogType;
+import com.example.ITBC_Logger_Endpoints.model.Log;
 import com.example.ITBC_Logger_Endpoints.model.User;
 import com.example.ITBC_Logger_Endpoints.repository.TestJpaRepository;
 import com.example.ITBC_Logger_Endpoints.repository.UserRepository;
@@ -10,8 +12,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @RestController
@@ -56,10 +60,29 @@ public class UserActionController {
 
         userRepository.insertUser(user);
 
+
         return ResponseEntity.status(HttpStatus.CREATED).body(null);
 
     }
 
+    @PostMapping("/api/logs/create")
+    public ResponseEntity<Void> createLog(@RequestHeader("clientId") UUID id, @RequestBody Log log) {
+
+
+        if (log.getLogType().getValue() != LogType.ERROR.getValue() &&
+                log.getLogType().getValue() != LogType.WARNING.getValue()
+                && log.getLogType().getValue() != LogType.INFO.getValue()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        } else if (log.getMessage().length() > 1024) {
+            ResponseEntity.status(HttpStatus.PAYLOAD_TOO_LARGE).body(null);
+        } else if (testJpaRepository.isIdExist(id) == 0) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+        }
+        log.setDateTime(LocalDateTime.now());
+
+        userRepository.insertLog(log);
+        return ResponseEntity.status(HttpStatus.CREATED).body(null);
+    }
 
 
 }

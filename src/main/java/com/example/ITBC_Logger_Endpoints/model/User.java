@@ -1,8 +1,6 @@
 package com.example.ITBC_Logger_Endpoints.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.UUID;
 
 
@@ -16,6 +14,7 @@ public class User {
     private String password;
     private String email;
 
+
     public User(UUID id, String username, String password, String email) {
         this.id = id;
         this.username = username;
@@ -27,6 +26,7 @@ public class User {
         this.username = username;
         this.password = password;
         this.email = email;
+
     }
 
     public User() {
@@ -63,6 +63,7 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+
 
     @Override
     public String toString() {

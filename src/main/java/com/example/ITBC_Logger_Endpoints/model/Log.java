@@ -1,32 +1,38 @@
 package com.example.ITBC_Logger_Endpoints.model;
 
-import com.example.ITBC_Logger_Endpoints.enums.logType;
+import com.example.ITBC_Logger_Endpoints.enums.LogType;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Table(name="Log")
 public class Log {
 
     @Id
-    private int id;
+    private int logId;
     private String message;
-    private logType logType;
+    private LogType logType;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
     private LocalDateTime dateTime;
+    private UUID id;
 
-    public Log(int id, String message, com.example.ITBC_Logger_Endpoints.enums.logType logType, LocalDateTime dateTime) {
-        this.id = id;
+
+    public Log(int logId, String message, LogType logType, LocalDateTime dateTime, UUID id) {
+        this.logId = logId;
         this.message = message;
         this.logType = logType;
         this.dateTime = dateTime;
+        this.id = id;
     }
 
-    public Log(String message, com.example.ITBC_Logger_Endpoints.enums.logType logType) {
+    public Log(String message, LogType logType, LocalDateTime dateTime, UUID id) {
         this.message = message;
         this.logType = logType;
+        this.dateTime = dateTime;
+        this.id = id;
     }
 
     public Log(String message) {
@@ -36,12 +42,12 @@ public class Log {
     public Log() {
     }
 
-    public int getId() {
-        return id;
+    public int getLogId() {
+        return logId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setLogId(int logId) {
+        this.logId = logId;
     }
 
     public String getMessage() {
@@ -52,11 +58,11 @@ public class Log {
         this.message = message;
     }
 
-    public com.example.ITBC_Logger_Endpoints.enums.logType getLogType() {
+    public LogType getLogType() {
         return logType;
     }
 
-    public void setLogType(com.example.ITBC_Logger_Endpoints.enums.logType logType) {
+    public void setLogType(LogType logType) {
         this.logType = logType;
     }
 
@@ -68,13 +74,24 @@ public class Log {
         this.dateTime = dateTime;
     }
 
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+
+
     @Override
     public String toString() {
         return "Log{" +
-                "id=" + id +
+                "logId=" + logId +
                 ", message='" + message + '\'' +
                 ", logType=" + logType +
                 ", dateTime=" + dateTime +
+                ", id=" + id +
                 '}';
     }
 }

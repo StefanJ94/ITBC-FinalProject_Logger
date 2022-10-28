@@ -1,18 +1,16 @@
 package com.example.ITBC_Logger_Endpoints.enums;
 
-public enum userType {
+public enum LogType {
 
-    CLIENT(0),
-    ADMIN(1);
-
+    ERROR(0),
+    WARNING(1),
+    INFO(2);
 
     public final int value;
-
-    private userType(int value) {
+    private LogType(int value) {
         this.value = value;
     }
-
-    public int getValue() {
+    public int getValue(){
         return value;
     }
 }
