@@ -12,6 +12,7 @@ import java.util.UUID;
 public class Log {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int logId;
     private String message;
     private LogType logType;

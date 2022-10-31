@@ -37,7 +37,11 @@ public interface TestJpaRepository extends JpaRepository<User, UUID> {
     @Query(value = "SELECT COUNT(*) FROM Users WHERE id=:id", nativeQuery = true)
     Integer isIdExist(@Param("id") UUID id);
 
-    @Query(value = "SELECT [message], [logType], [dateTime], [id] FROM Logs l JOIN Users u ON l.id = u.id WHERE u.id = :id", nativeQuery = true)
+
+
+
+
+  /*  @Query(value = "SELECT [message], [logType], [dateTime], [id] FROM Logs l JOIN Users u ON l.id = u.id WHERE u.id = :id", nativeQuery = true)
     Log getAllLogsByClient(@Param("id") UUID id);
 
     @Query(value = "SELECT u FROM Users u WHERE u.id = ?1",nativeQuery = true)
@@ -50,5 +54,5 @@ public interface TestJpaRepository extends JpaRepository<User, UUID> {
     Optional<User> findUserByPassword(@Param("password") String password);
 
     @Query(value = "SELECT u FROM Users u WHERE u.email = ?1",nativeQuery = true)
-    Optional<User> findUsersByEmail(@Param("email") String email);
+    Optional<User> findUsersByEmail(@Param("email") String email);*/
 }
